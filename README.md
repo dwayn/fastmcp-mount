@@ -1,5 +1,5 @@
 # FastMCP Mount
-[![PyPI version](https://badge.fury.io/py/fastmcp-mount.svg)](https://badge.fury.io/py/fastmcp-mount)
+[![PyPI version](https://img.shields.io/pypi/v/fastmcp-mount.svg)](https://pypi.org/project/fastmcp-mount/)
 [![CI](https://github.com/dwayn/fastmcp-mount/actions/workflows/ci.yml/badge.svg)](https://github.com/dwayn/fastmcp-mount/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
