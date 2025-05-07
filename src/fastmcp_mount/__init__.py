@@ -1,4 +1,3 @@
-# src/fastmcp_mount/__init__.py
 """
 FastMCP Mount ASGI Middleware
 

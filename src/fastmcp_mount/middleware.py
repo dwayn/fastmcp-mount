@@ -1,4 +1,3 @@
-# src/fastmcp_mount/middleware.py
 import logging
 import re
 
