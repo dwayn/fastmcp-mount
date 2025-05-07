@@ -97,3 +97,38 @@ testpaths = [
     "tests",
 ]
 asyncio_default_fixture_loop_scope = "function"
+
+
+[tool.mypy]
+python_version = "3.8"                # Target oldest supported Python version
+warn_return_any = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+# Strictness flags (can be adjusted based on preference and initial findings)
+strict = true                         # Enable all optional error checking flags
+disallow_untyped_defs = true          # Enforce type hints on all functions
+# disallow_incomplete_defs = true     # Even stricter definition checking
+
+# For handling missing stubs for third-party libraries
+# Starlette has stubs, so we shouldn't need to ignore it.
+# If other dependencies without stubs are added later, you might need:
+# ignore_missing_imports = true # Generally try to avoid this for key dependencies
+
+# Where to look for code
+mypy_path = "src"
+packages = ["fastmcp_mount"]
+
+# Exclude files/directories
+exclude = [
+    "\\.venv",
+    "\\.tox",
+    "\\.eggs",
+    "build",
+    "dist",
+]
+
+
+[tool.setuptools.dynamic] # This whole section must exist
+version = {attr = "fastmcp_mount.__init__.__version__"} # Check this path carefully
