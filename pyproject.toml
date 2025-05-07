@@ -14,9 +14,8 @@ license = { file="LICENSE" }
 requires-python = ">=3.8"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Framework :: ASGI",
+    "Framework :: AsyncIO",
     "Framework :: FastAPI",
-    "Framework :: Starlette",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
