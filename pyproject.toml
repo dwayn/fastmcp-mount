@@ -1,0 +1,99 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastmcp-mount"
+authors = [
+  { name="Dwayn Matthies", email="dwayn.matthies@gmail.com" },
+]
+description = "ASGI Middleware to fix FastMCP endpoint paths when mounted under a sub-path."
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: ASGI",
+    "Framework :: FastAPI",
+    "Framework :: Starlette",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+keywords = ["asgi", "middleware", "fastmcp", "mcp", "sse", "fastapi", "starlette", "mount", "subpath", "path", "fix"]
+dependencies = [
+    "starlette>=0.30.0"
+]
+dynamic = ["version"]
+
+
+[project.urls]
+Homepage = "https://github.com/dwayn/fastmcp-mount"
+Repository = "https://github.com/dwayn/fastmcp-mount"
+Issues = "https://github.com/dwayn/fastmcp-mount/issues"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.18.0",
+    "httpx>=0.25.0",        # For client testing
+    "uvicorn[standard]>=0.20.0", # Needed by httpx ASGITransport/TestClient sometimes
+]
+dev = [
+    "fastmcp-mount[test]", # Include test dependencies in dev # << UPDATED NAME
+    "ruff>=0.1.0",             # Linter/formatter
+    "build>=0.10.0",           # For building the package
+    "twine>=4.0.0",            # For uploading to PyPI
+    "mypy>=1.0.0",             # For type checking
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]  # look for packages in the src directory
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = []
+fixable = [
+    "I",  # isort
+    "UP", # pyupgrade
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "SIM",# flake8-simplify
+    # Add more fixable rules as desired
+    "F401", # Unused imports
+]
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+# Add '-sv' for verbose output during tests if desired
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+asyncio_default_fixture_loop_scope = "function"

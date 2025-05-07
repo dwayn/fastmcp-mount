@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test: # You can rename this job if you prefer, e.g., "lint-and-test"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev,test]" # dev dependencies now include mypy
+
+    - name: Lint with Ruff
+      run: |
+        ruff check src tests
+        ruff format --check src tests
+
+    - name: Type check with MyPy # << NEW STEP
+      # Run MyPy only on one Python version to save CI time, as type checking is usually Python version agnostic
+      # unless you are using version-specific syntax heavily that MyPy needs to parse.
+      if: matrix.python-version == '3.11' # Or your preferred primary testing version
+      run: |
+        mypy src/fastmcp_mount
+
+    - name: Test with pytest
+      run: |
+        pytest
