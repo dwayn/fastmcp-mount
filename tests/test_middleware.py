@@ -84,9 +84,7 @@ def test_endpoint_path_rewriting(mount_path, expected_endpoint_data):
 
     assert response.status_code == 200
     # Modify assertion to check the start of the content-type header
-    assert response.headers["content-type"].startswith(
-        "text/event-stream"
-    )
+    assert response.headers["content-type"].startswith("text/event-stream")
 
     raw_data = response.content
     try:
